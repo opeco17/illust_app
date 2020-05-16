@@ -62,7 +62,7 @@ def main():
         jobDefinitionName=names['jobDefinition'],
         type='container',
         containerProperties={
-            'image': '829044821271.dkr.ecr.ap-northeast-1.amazonaws.com/face_clip:latest',
+            'image': '829044821271.dkr.ecr.ap-northeast-1.amazonaws.com/tag_extraction:latest',
             'vcpus': 1,
             'memory': 256,
             'jobRoleArn': 'arn:aws:iam::829044821271:role/ImageCrawlerECSTask',
