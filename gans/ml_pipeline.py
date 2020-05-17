@@ -23,7 +23,7 @@ def main():
 
     estimator1 = PyTorch(entry_point='train.py', 
                         source_dir='projection_discriminator',
-                    role=sagemaker_execution_role,
+	                    role=sagemaker_execution_role,
                         framework_version='1.4.0',
                         train_instance_count=2,
                         train_instance_type='ml.m5.2xlarge',
@@ -34,7 +34,7 @@ def main():
 
     estimator2 = PyTorch(entry_point='train.py', 
                         source_dir='projection_discriminator',
-                    role=sagemaker_execution_role,
+    	                role=sagemaker_execution_role,
                         framework_version='1.4.0',
                         train_instance_count=2,
                         train_instance_type='ml.m5.2xlarge',
