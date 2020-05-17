@@ -9,13 +9,11 @@ def main():
     with open('./stepfunctions_name.json', 'r') as f:
         names = json.load(f)
 
-
     client.put_rule(
         Name=names['cloudwatch_events_name'],
         ScheduleExpression='cron(0 3 * * ? *)',
         State='ENABLED',
     )
-
 
     client.put_targets(
         Rule=names['cloudwatch_events_name'],
