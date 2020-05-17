@@ -22,7 +22,7 @@ Activity contents are ...
    - Dataset consists of almost 30k my favorite users' works in [pixiv](https://www.pixiv.net/).
    - Images are scraiped by using [pixivpy](https://github.com/upbit/pixivpy), third party high level API.
    - Collected images are clipped to extract face by [OpenCV](https://opencv.org/).
-   - Tags if images (i.e. hair colors, eyes colors...) are extracted by [illustration2vec](https://github.com/rezoo/illustration2vec), a CNN based deep learning models.
+   - Tags of images (i.e. hair colors, eyes colors...) are predicted by [illustration2vec](https://github.com/rezoo/illustration2vec), a CNN based deep learning models.
   
   ## cGANs with Projection Discriminator
   
