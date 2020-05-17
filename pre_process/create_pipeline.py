@@ -1,6 +1,5 @@
 import logging
 import json
-import uuid
 
 import boto3
 import stepfunctions
@@ -12,7 +11,10 @@ def main():
     stepfunctions.set_stream_logger(level=logging.INFO)
     workflow_execution_role = 'arn:aws:iam::829044821271:role/StepFunctionsWorkflowExecutionRole'
 
-    # Load batch job name
+    # Load job name
+    with open('./stepfunctions_name.json', 'r') as f:
+        stepfunctions_name = json.load(f)
+
     with open('./face_clip/aws_batch/batch_names.json', 'r') as f:
         face_clip_name = json.load(f)
         
@@ -43,14 +45,14 @@ def main():
     workflow_definition = steps.Chain(chain_list)
 
     workflow = Workflow(
-        name='preprocessing_workflow_{0}'.format(uuid.uuid4()),
+        name=stepfunctions_name['workflow'],
         definition=workflow_definition,
         role=workflow_execution_role,
     )
 
-    # Execute workflow
+    #  workflow
     workflow.create()
-    workflow.execute()
+    # workflow.execute()
 
 
 if __name__ == '__main__':

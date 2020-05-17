@@ -20,7 +20,7 @@ def main():
             'type': 'EC2',
             'allocationStrategy': 'BEST_FIT',
             'minvCpus': 0,
-            'maxvCpus': 4,
+            'maxvCpus': 16,
             'desiredvCpus': 0,
             'instanceTypes': [
                 'optimal'
@@ -63,8 +63,8 @@ def main():
         type='container',
         containerProperties={
             'image': '829044821271.dkr.ecr.ap-northeast-1.amazonaws.com/face_clip:latest',
-            'vcpus': 1,
-            'memory': 256,
+            'vcpus': 4,
+            'memory': 4096,
             'jobRoleArn': 'arn:aws:iam::829044821271:role/ImageCrawlerECSTask',
         }
     )
