@@ -8,3 +8,4 @@ Activity contents are ...
 2. Machine Learning model (GANs) development
 
 # Machine Learning Infrastructure 
+
