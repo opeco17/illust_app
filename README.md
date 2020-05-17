@@ -15,7 +15,12 @@ Activity contents are ...
  - Most process are described by boto3 and its high level API (i.e. Step Functions Data Science SDK).
  
  # Machine Learning (GANs) 
- 
+  - Using GANs (Generative Adversarial Networks) for generating anime character images.
+  - Try various GANs models to find best machine learning models.
+  
+  ## cGANs with Projection Discriminator
+  
+  <img width="500" src="https://user-images.githubusercontent.com/46510874/77031702-bb5bbc00-69e5-11ea-8f12-bdee742d471f.png">
  
  
  
