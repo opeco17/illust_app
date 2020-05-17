@@ -6,6 +6,7 @@ Activity contents are ...
 
 1. Machine Learning Infrastracture development
 2. Machine Learning model (GANs) development
+3. Web Application development
 
 # Machine Learning Infrastructure
 
