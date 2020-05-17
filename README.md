@@ -18,6 +18,12 @@ Activity contents are ...
   - Using GANs (Generative Adversarial Networks) for generating anime character images.
   - Try various GANs models to find best machine learning models.
   
+  ## Dataset
+   - Dataset is almost 30k my favorite users' works in pixiv.
+   - Images are scraiped by [pixivpy](https://github.com/upbit/pixivpy), third party high level API.
+   - Collected images are clipped to extract face by OpenCV.
+   - Also images tags (i.e. hair colors, eyes colors...) are extracted by [illustration2vec](https://github.com/rezoo/illustration2vec), a CNN based deep learning models.
+  
   ## cGANs with Projection Discriminator
   
   <img width="500" src="https://user-images.githubusercontent.com/46510874/77031702-bb5bbc00-69e5-11ea-8f12-bdee742d471f.png">
