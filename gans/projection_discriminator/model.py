@@ -52,7 +52,7 @@ class CategoricalConditionalBatchNorm2d(ConditionalBatchNorm2d):
         init.ones_(self.weights.weight.data)
         init.zeros_(self.biases.weight.data)
 
-    def forward(self, input, c, **kwargs):
+    def forward(self, input, c):
         weight = self.weights(c)
         bias = self.biases(c)
 
@@ -82,7 +82,7 @@ class GeneratorBlock(nn.Module):
         init.xavier_uniform_(self.c2.weight.data, gain=math.sqrt(2))
         init.xavier_uniform_(self.c_sc.weight.data, gain=1)
             
-    def forward(self, x, y, **kwargs):
+    def forward(self, x, y):
         return self.c_sc(self._upsample(x)) + self.residual(x, y)
 
     def residual(self, x, y):
@@ -126,7 +126,7 @@ class ResNetGenerator(nn.Module):
         init.xavier_uniform_(self.l1.weight.data)
         init.xavier_uniform_(self.conv6.weight.data)
 
-    def forward(self, z, y=None, **kwargs):
+    def forward(self, z, y=None):
         h = self.l1(z).view(z.size(0), -1, self.bottom_width, self.bottom_width) 
         h = self.block2(h, y)
         h = self.block3(h, y)
@@ -194,7 +194,7 @@ class OptimizedBlock(nn.Module):
         return self.c_sc(F.avg_pool2d(x, 2))
 
     def residual(self, x):
-        h = self.activation(self.c1(x))
+        h = self.c1(x)
         return F.avg_pool2d(self.c2(h), 2)
 
 
