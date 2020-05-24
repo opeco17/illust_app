@@ -9,7 +9,6 @@ import torch.autograd as autograd
 from torch.nn import init
 
 
-
 def cal_gradient_penalty(dis, real_data, fake_data, coef, device):
     alpha = torch.rand(real_data.shape[0], 1)
     alpha = alpha.expand(real_data.size())

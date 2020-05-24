@@ -8,7 +8,6 @@ import torch.nn.functional as F
 from torch.nn import init
 
 
-
 class GeneratorBlock(nn.Module):
     
     def __init__(self, in_ch, out_ch, h_ch=None, k_size=3, pad=1, activation=F.relu):
