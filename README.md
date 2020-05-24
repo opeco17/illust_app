@@ -27,6 +27,7 @@ Activity contents are ...
   
   ## cGANs with Projection Discriminator
   Paper -> https://arxiv.org/abs/1802.05637
+  
   Code -> gans/projection_discriminator
   
  <img width="600" alt="スクリーンショット 2020-05-24 11 28 35" src="https://user-images.githubusercontent.com/46510874/82744354-2ba20780-9db2-11ea-88f5-865b93f26f6d.png">
