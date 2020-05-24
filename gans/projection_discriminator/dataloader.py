@@ -1,7 +1,9 @@
+import os
 import numpy as np
+
 import torch
 from PIL import Image
-import os
+
 
 def sample_z(batch_size, dim_z, device):
     return torch.empty(batch_size, dim_z, dtype=torch.float32, device=device).normal_()
