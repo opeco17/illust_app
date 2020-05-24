@@ -36,6 +36,7 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
   
  ## WGAN-GP
  Paper -> https://arxiv.org/abs/1704.00028
+ 
  Code -> gans/wgan-gp
  
  ## SAGAN
