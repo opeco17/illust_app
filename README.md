@@ -35,4 +35,5 @@ Activity contents are ...
  ## WGAN-GP
  Paper -> https://arxiv.org/abs/1704.00028
  
- 
+ ## SAGAN
+ Paper -> https://arxiv.org/abs/1805.08318
