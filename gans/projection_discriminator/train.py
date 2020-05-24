@@ -26,7 +26,7 @@ def train(args):
     image_tag_df = pd.read_csv(os.path.join(args.data_dir, 'image_tag.csv'))
     image_tag_df = image_tag_df.dropna(how='any')    
     
-    all_img_path_list = glob.glob(args.data_dir+'/face_images/*/*')
+    all_img_path_list = glob.glob(args.data_dir+'/face_images/*/*.png')
     all_img_name_list = [all_img_path.lstrip(args.data_dir+'/face_images/') for all_img_path in all_img_path_list]
 
     img_name_list = list(set(image_tag_df['image name']) & set(all_img_name_list))
