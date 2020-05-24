@@ -30,6 +30,7 @@ Activity contents are ...
   
  <img width="600" alt="スクリーンショット 2020-05-24 11 28 35" src="https://user-images.githubusercontent.com/46510874/82744354-2ba20780-9db2-11ea-88f5-865b93f26f6d.png">
  
- 
+ ## WGAN-GP
+ Paper -> https://arxiv.org/abs/1704.00028
  
  
