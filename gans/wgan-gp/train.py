@@ -2,6 +2,7 @@ import os
 import glob
 import math
 import argparse
+import json
 import numpy as np
 
 import torch
@@ -89,7 +90,7 @@ def train(args):
 def save_model(gen, model_dir, epoch):
     path = os.path.join(model_dir, 'generator-{0}epoch.pth'.format(epoch))
     torch.save(gen.cpu().state_dict(), path)
-    
+
 
 if __name__ == '__main__':
 

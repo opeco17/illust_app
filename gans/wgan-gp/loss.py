@@ -10,8 +10,8 @@ from torch.nn import init
 
 
 def cal_gradient_penalty(dis, real_data, fake_data, coef, device):
-    alpha = torch.rand(real_data.shape[0], 1)
-    alpha = alpha.expand(real_data.size())
+    alpha = torch.rand(real_data.shape[0], 1, 1, 1)
+    alpha = alpha.expand_as(real_data)
     alpha = alpha.to(device)
     
     interpolates = alpha * real_data + (1 - alpha) * fake_data
