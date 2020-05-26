@@ -27,12 +27,12 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
    - Collected images are clipped to extract face by [OpenCV](https://opencv.org/).
    - Tags of images (e.g. hair colors, eyes colors...) are predicted by [illustration2vec](https://github.com/rezoo/illustration2vec), a CNN based deep learning model.
   
-  ## cGANs with Projection Discriminator  
+  ## SNGAN
  <img width="600" alt="スクリーンショット 2020-05-24 11 28 35" src="https://user-images.githubusercontent.com/46510874/82744354-2ba20780-9db2-11ea-88f5-865b93f26f6d.png">
  
-  Paper -> https://arxiv.org/abs/1802.05637
+  Paper -> https://arxiv.org/abs/1802.05957
   
-  Code -> gans/projection_discriminator
+  Code -> gans/sngan
   
  ## WGAN-GP
  Paper -> https://arxiv.org/abs/1704.00028
