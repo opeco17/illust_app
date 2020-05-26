@@ -22,7 +22,7 @@ def main():
     workflow_execution_role = 'arn:aws:iam::829044821271:role/StepFunctionsWorkflowExecutionRole'
 
     estimator1 = PyTorch(entry_point='train.py', 
-                        source_dir='wgan-gp',
+                        source_dir='projection_discriminator',
 	                    role=sagemaker_execution_role,
                         framework_version='1.4.0',
                         train_instance_count=2,
@@ -33,7 +33,7 @@ def main():
                     )
 
     estimator2 = PyTorch(entry_point='train.py', 
-                        source_dir='wgan-gp',
+                        source_dir='wgan_gp',
     	                role=sagemaker_execution_role,
                         framework_version='1.4.0',
                         train_instance_count=2,
