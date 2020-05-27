@@ -20,7 +20,7 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
  # Machine Learning (GANs) 
   - Using GANs (Generative Adversarial Networks) for generating anime character images.
   - Try various GANs models and various preprocessing to generate best quality anime character.
-  - All conditional models are based on projection(https://arxiv.org/abs/1802.05637). 
+  - All conditional models are based on projection (https://arxiv.org/abs/1802.05637). 
   
   ## Dataset
    - Dataset consists of almost 30k my favorite users' works in [pixiv](https://www.pixiv.net/).
