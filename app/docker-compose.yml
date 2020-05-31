@@ -1,0 +1,34 @@
+version: '3.1'
+
+services:
+  app:
+    build: .
+    ports: 
+      - 5000:5000
+    volumes:
+      - "./src:/src"
+    tty: true
+    networks:
+      - pixiv-gans-network
+
+  db:
+    build: ./db
+    restart: always
+    hostname: my-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Tokyo"
+      BIND-ADDRESS: 0.0.0.0
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/mysql_init:/docker-entrypoint-initdb.d #初期化時に使用されるSQL
+      - ./db/mysql_data:/var/lib/mysql #データの永続化
+      - ./db/conf.d:/etc/mysql/conf. #設定ファイルの移行
+    tty: true
+    networks:
+      - pixiv-gans-network
+
+networks:
+    pixiv-gans-network:
+        external: true
