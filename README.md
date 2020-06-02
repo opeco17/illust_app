@@ -17,7 +17,7 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
  - Use AWS for automaticaly and efficiently training models.
  - Most process are described by boto3 and its high level API (e.g. Step Functions Data Science SDK).
  
- # Machine Learning (GANs) 
+ # Machine Learning
   - Using GANs (Generative Adversarial Networks) for generating anime character images.
   - Try various GANs models and various preprocessing to generate best quality anime character.
   - All conditional models are based on projection (https://arxiv.org/abs/1802.05637). 
@@ -36,14 +36,12 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
   Code -> gans/sngan
   
  ## WGAN-GP
- Paper -> https://arxiv.org/abs/1704.00028
- 
  Code -> gans/wgan-gp
  
- ## SAGAN
- Paper -> https://arxiv.org/abs/1805.08318
+ ## Auto Encoder with Self Attention
+ 
 
-# Web Applicatio
+# Web Application
 ## Web Application Infrastructure
 <img width="986" alt="スクリーンショット 2020-05-31 19 58 41" src="https://user-images.githubusercontent.com/46510874/83350741-29731680-a379-11ea-8662-39e9e6e4faa3.png">
 
