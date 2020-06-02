@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<h3>あなた好みのオリジナルイラストを生成します</h3>
+<h3>どのようにイラストを生成しますか？</h3>
+<br>
+<a href="{{ url_for('illust_condition')}}">お気に入りのイラストから生成</a>
+<br>
+<a href="{{ url_for('tag_condition')}}">お好みのタグから生成</a>
+{% endblock %}
