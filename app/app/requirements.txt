@@ -1,12 +1,14 @@
 uwsgi==2.0.17
 Flask==1.0.3
+Flask-Bootstrap4==4.0.2
+Flask-WTF==0.14.3
+WTForms==2.2.1 
 mysqlclient==1.4.6
 numpy==1.18.4
-torch==1.5.0
-torchvision==0.6.0
-chainer==7.4.0
-Flask-Bootstrap4==4.0.2
-boto3==1.13.19
-opencv-python==4.2.0.34
-pandas==1.0.4
+#torch==1.5.0
+#torchvision==0.6.0
+#chainer==7.4.0
+#boto3==1.13.19
+#opencv-python==4.2.0.34
+#pandas==1.0.4
 

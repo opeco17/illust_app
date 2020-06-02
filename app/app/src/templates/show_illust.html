@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<h3>イラストを生成しました</h3>
+<br>
+<div class="imgs">
+    {% for illust_path in illust_paths_first %}
+        <img src="{{ illust_path }}" alt="generated illust">
+    {% endfor %}
+    <br><br>
+    {% for illust_path in illust_paths_second %}
+        <img src="{{ illust_path }}" alt="generated illust">
+    {% endfor %}
+</div>
+<br><br>
+<a href="{{ url_for('index')}}">はじめのページへ戻る</a>
+{% endblock %}
