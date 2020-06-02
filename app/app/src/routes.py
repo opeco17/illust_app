@@ -15,7 +15,8 @@ def illust_condition():
 	upload_form = IllustUploadForm()
 	if upload_form.validate_on_submit():
 		upload_form.illust.data.save('./upload_illust/'+'1.png')
-		return render_template('show_illust.html')
+		illust_paths = IllustChooser.choose_illust_paths()
+		return render_template('show_illust.html', illust_paths_first=illust_paths[:5], illust_paths_second=illust_paths[5:])
 
 	else:
 		# if upload_form.illust.data is not None:
@@ -27,8 +28,7 @@ def illust_condition():
 def tag_condition():
 	tag_select_form = TagSelectForm()
 	if tag_select_form.validate_on_submit():
-		illust_ids = IllustChooser.choose_illust_ids()
-		print(illust_ids)
-		return render_template('show_illust.html')
+		illust_paths = IllustChooser.choose_illust_paths()
+		return render_template('show_illust.html', illust_paths_first=illust_paths[:5], illust_paths_second=illust_paths[5:])
 	else:
 		return render_template('tag_condition.html', form=tag_select_form)
