@@ -1,11 +1,10 @@
 # Overview
-Generate my favorite anime character by machine learning (GANs).
-Dataset are prepared by scraiping from pixiv users I bookmarked.
+Generate your favorite anime character by multiple machine learning models (GANs, AutoEncoder, CNN...).
 
 Activity contents are ...
 
 1. Machine Learning Infrastracture development
-2. Machine Learning model (GANs) development
+2. Machine Learning technology
 3. Web Application development
 
 What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
@@ -17,10 +16,8 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
  - Use AWS for automaticaly and efficiently training models.
  - Most process are described by boto3 and its high level API (e.g. Step Functions Data Science SDK).
  
- # Machine Learning
-  - Using GANs (Generative Adversarial Networks) for generating anime character images.
-  - Try various GANs models and various preprocessing to generate best quality anime character.
-  - All conditional models are based on projection (https://arxiv.org/abs/1802.05637). 
+ # Machine Learning technology
+  - Use multiple meachine learning models for multiple purposes.
   
   ## Dataset
    - Dataset consists of almost 30k my favorite users' works in [pixiv](https://www.pixiv.net/).
@@ -29,17 +26,21 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
    - Tags of images (e.g. hair colors, eyes colors...) are predicted by [illustration2vec](https://github.com/rezoo/illustration2vec), a CNN based deep learning model.
   
   ## SNGAN
- <img width="600" alt="スクリーンショット 2020-05-24 11 28 35" src="https://user-images.githubusercontent.com/46510874/82744354-2ba20780-9db2-11ea-88f5-865b93f26f6d.png">
+ Use SNGAN for generating high quality images.
  
-  Paper -> https://arxiv.org/abs/1802.05957
+ <img width="600" alt="スクリーンショット 2020-05-24 11 28 35" src="https://user-images.githubusercontent.com/46510874/82744354-2ba20780-9db2-11ea-88f5-865b93f26f6d.png">
   
   Code -> gans/sngan
   
- ## WGAN-GP
- Code -> gans/wgan-gp
+  ## WGAN-GP
+  It's not used now due to its ouput quality.
+  
+  Code -> gans/wgan
  
  ## Auto Encoder with Self Attention
+ Use Auto Encoder for image to image recommendation system.
  
+ AutoEncoder extracts feature of images and calculate similarity between submitted ones and generated ones.
 
 # Web Application
 ## Web Application Infrastructure
