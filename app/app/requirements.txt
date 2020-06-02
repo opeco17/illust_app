@@ -1,7 +1,8 @@
 uwsgi==2.0.17
 Flask==1.0.3
 Flask-Bootstrap4==4.0.2
-Flask-WTF==0.14.3 
+Flask-WTF==0.14.3
+WTForms==2.2.1 
 mysqlclient==1.4.6
 numpy==1.18.4
 #torch==1.5.0
