@@ -17,7 +17,7 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
  - Most process are described by boto3 and its high level API (e.g. Step Functions Data Science SDK).
  
  # Machine Learning technology
-  - Use multiple meachine learning models for multiple purposes.
+  - Use multiple meachine learning models for generating images, recommender system, and tag extraction.
   
   ## Dataset
    - Dataset consists of almost 30k my favorite users' works in [pixiv](https://www.pixiv.net/).
