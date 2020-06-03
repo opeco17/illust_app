@@ -13,7 +13,7 @@ class GeneratorBlock(nn.Module):
     def __init__(self, in_ch, out_ch, h_ch=None, k_size=3, pad=1, activation=F.relu):
         super(GeneratorBlock, self).__init__()
         
-        h_ch = out_ch if h_ch is None else h_ch
+        h_ch = in_ch if h_ch is None else h_ch
         self.activation = activation
         self.c1 = nn.Conv2d(in_ch, h_ch, k_size, 1, pad)
         self.c2 = nn.Conv2d(h_ch, out_ch, k_size, 1, pad)
@@ -87,7 +87,7 @@ class DiscriminatorBlock(nn.Module):
     def __init__(self, in_ch, out_ch, h_ch=None, k_size=3, pad=1, activation=F.relu, optimize=False):
         super(DiscriminatorBlock, self).__init__()
         
-        h_ch = in_ch if h_ch is None else out_ch
+        h_ch = in_ch if h_ch is None else h_ch
     
         self.optimize = optimize
         self.activation = activation
