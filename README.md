@@ -46,4 +46,6 @@ What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
 ## Web Application Infrastructure
 <img width="986" alt="スクリーンショット 2020-05-31 19 58 41" src="https://user-images.githubusercontent.com/46510874/83350741-29731680-a379-11ea-8662-39e9e6e4faa3.png">
 
-## Web Application Architecture
+## Web Application Page
+<img width="900" alt="スクリーンショット 2020-06-03 23 19 25" src="https://user-images.githubusercontent.com/46510874/83648170-b247b780-a5f0-11ea-950b-03def65fc3ac.png">
+
