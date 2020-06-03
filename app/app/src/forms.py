@@ -2,9 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField, SubmitField, FileField, ValidationError, RadioField, SelectField
 from wtforms.validators import DataRequired
 
-
 class IllustUploadForm(FlaskForm):
-    illust = FileField('Upload Illust', validators=[ValidationError])
+    illust = FileField('', validators=[ValidationError])
     submit = SubmitField('Submit')
 
     def validate_illust(self, illust):

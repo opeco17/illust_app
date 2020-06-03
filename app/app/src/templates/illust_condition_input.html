@@ -3,10 +3,17 @@
 
 {% block app_content %}
 <h4>あなたのお気に入りのイラストをアップロードして下さい</h4>
-<br>
+<h4>jpgまたはpngを選択できます。</h4>
 <div class="form">
     {{ wtf.quick_form(form) }}
+    <!-- <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+      
+        {{ wtf.form_field(form.illust) }}
+        {{ wtf.form_field(form.submit, class="btn btn-primary") }}
+      </form> -->
 </div>
-<br><br>
+<br>
 <a href="{{ url_for('index')}}">前のページへ戻る</a>
 {% endblock %}
