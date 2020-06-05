@@ -9,6 +9,8 @@ services:
       - 3031:3031
     environment:
       TZ: "Asia/Tokyo"
+    depends_on:
+      - "db"
     tty: true
     networks:
       - pixiv-gans-network
@@ -22,13 +24,15 @@ services:
       - 5000:80
     environment:
       TZ: "Asia/Tokyo"
+    depends_on:
+      - "db"
     tty: true
     networks:
       - pixiv-gans-network
 
   db:
     build: ./db
-    restart: always
+    # restart: always
     hostname: my-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root

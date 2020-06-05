@@ -1,6 +1,9 @@
+import json
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, SubmitField, FileField, ValidationError, RadioField, SelectField
 from wtforms.validators import DataRequired
+
+from run import hair_color_choices, eye_color_choices
 
 class IllustUploadForm(FlaskForm):
     illust = FileField('', validators=[ValidationError])
@@ -12,7 +15,6 @@ class IllustUploadForm(FlaskForm):
 
 
 class TagSelectForm(FlaskForm):
-    # sex = RadioField('Sex', choices=[(1,'Male'),(2,'Female')])
-    hair_color_type = SelectField('Hair color', choices=[(1, 'Black'), (2, 'Pink')], coerce=int)
-    eye_color_type = SelectField('Eye color', choices=[(1, 'Black'), (2, 'Pink')], coerce=int)
+    hair_color_type = SelectField('Hair color', choices=hair_color_choices)
+    eye_color_type = SelectField('Eye color', choices=eye_color_choices)
     submit = SubmitField('Submit')

@@ -4,15 +4,15 @@
 <h4>あなた好みのオリジナルイラストを生成します。</h4>
 <h4>どのようにイラストを生成しますか？</h4>
 <br>
-<div style="float:left; padding: 10px; ">
-    <a href="{{ url_for('illust_condition')}}" class="btn btn-outline-primary btn-lg">好きなイラストから生成</a>
-</div>
 <div style="float:left; padding: 10px;">
     <a href="{{ url_for('tag_condition')}}" class="btn btn-outline-primary btn-lg">お好みのタグから生成</a>
 </div>
+<div style="float:left; padding: 10px; ">
+    <a href="{{ url_for('illust_condition')}}" class="btn btn-outline-primary btn-lg">好きなイラストから生成</a>
+</div>
 <br><br><br><br>
 <div class="card card-body bg-light" style="clear:both;">
-    <h4>あなたの好みをもとに、AIが世界に一つだけのイラストを生成します。</h4>
-    <img src="static/sample_img.png" alt="sample illust" width="65%" height="65%">
+    <h4>あなたの好みをもとに、AIが世界に一枚だけのイラストを生成します。</h4>
+    <img src="./static/sample_img.png" alt="sample illust" width="65%" height="65%">
 </div>
 {% endblock %}
