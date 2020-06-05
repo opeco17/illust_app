@@ -1,6 +1,6 @@
-CREATE DATABASE generated_imgs;
+CREATE DATABASE image_db;
 
-use generated_imgs;
+use image_db;
 
 CREATE TABLE images(
   image_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,7 +9,7 @@ CREATE TABLE images(
   eye_color VARCHAR(255),
   other_info VARCHAR(255),
   generated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  used_date DATE
+  used BOOLEAN DEFAULT FALSE
 ) ENGINE=INNODB;
 
 

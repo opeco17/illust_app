@@ -29,6 +29,7 @@ def tag_condition():
 	tag_select_form = TagSelectForm()
 	if tag_select_form.validate_on_submit():
 		illust_paths = IllustChooser.choose_illust_paths()
+		print(illust_paths[0])
 		return render_template('show_illust.html', illust_paths_first=illust_paths[:5], illust_paths_second=illust_paths[5:])
 	else:
 		return render_template('tag_condition.html', form=tag_select_form)
