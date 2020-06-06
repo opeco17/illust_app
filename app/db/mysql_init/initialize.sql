@@ -1,6 +1,6 @@
 CREATE DATABASE image_db;
 
-use image_db;
+USE image_db;
 
 CREATE TABLE images(
   image_id INT AUTO_INCREMENT PRIMARY KEY,

@@ -15,6 +15,6 @@ class IllustUploadForm(FlaskForm):
 
 
 class TagSelectForm(FlaskForm):
-    hair_color_type = SelectField('Hair color', choices=hair_color_choices)
-    eye_color_type = SelectField('Eye color', choices=eye_color_choices)
+    hair_color_type = SelectField('Hair Color', choices=hair_color_choices)
+    eye_color_type = SelectField('Eye Color', choices=eye_color_choices)
     submit = SubmitField('Submit')

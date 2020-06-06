@@ -2,6 +2,7 @@ import MySQLdb
 
 
 class DBConnector(object):
+    
     def __init__(self):
         self.conn = MySQLdb.connect(
             host = 'db', 
@@ -13,12 +14,31 @@ class DBConnector(object):
         self.cursor = self.conn.cursor()
 
 
-    def get_img_name_from_tag(self, hair_color, eye_color, get_img_num):
-        self.cursor.execute(
-            "SELECT image_name FROM images \
-            WHERE hair_color = %s AND eye_color = %s AND used = FALSE \
-            LIMIT %s", (hair_color, eye_color, get_img_num)
-        )
+    def get_img_names_from_tag(self, get_img_num, hair_color=None, eye_color=None):
+        if hair_color is None and eye_color is None:
+            self.cursor.execute(
+                "SELECT image_name FROM images \
+                WHERE used = FALSE \
+                LIMIT %s", (get_img_num, )
+            )
+        elif hair_color is None:
+            self.cursor.execute(
+                "SELECT image_name FROM images \
+                WHERE eye_color = %s AND used = FALSE \
+                LIMIT %s", (eye_color, get_img_num)
+            )
+        elif eye_color is None:
+            self.cursor.execute(
+                "SELECT image_name FROM images \
+                WHERE hair_color = %s AND used = FALSE \
+                LIMIT %s", (hair_color, get_img_num)
+            )
+        else:
+            self.cursor.execute(
+                "SELECT image_name FROM images \
+                WHERE hair_color = %s AND eye_color = %s AND used = FALSE \
+                LIMIT %s", (hair_color, eye_color, get_img_num)
+            )
         result = self.cursor.fetchall()
         result = [img_name[0] for img_name in list(result)]
         return result
@@ -42,10 +62,11 @@ class DBConnector(object):
         )
 
 
-    def stamp_used_img(self, image_name):
-        self.cursor.execute(
-            "UPDATE images SET used = TRUE WHERE image_name = %s", (image_name,)
-        )
+    def stamp_used_img(self, image_names):
+        for image_name in image_names:
+            self.cursor.execute(
+                "UPDATE images SET used = TRUE WHERE image_name = %s", (image_name,)
+            )
     
 
     def complete(self):

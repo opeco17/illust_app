@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -10,6 +11,7 @@ class EncoderBlock(nn.Module):
         self.bn = nn.BatchNorm2d(out_ch)
         self.activation = nn.ReLU()
         
+
     def forward(self, x):
         h = x
         h = self.c(h)
@@ -28,6 +30,7 @@ class Encoder(nn.Module):
         self.layer4 = EncoderBlock(num_features*4, num_features*8)
         self.layer5 = nn.Linear(4096, h_dim)
     
+
     def forward(self, x):
         h = x
         h = self.layer1(h)
@@ -36,6 +39,26 @@ class Encoder(nn.Module):
         h = self.layer4(h).view(-1, 4096)
         h = self.layer5(h)
         return h
+
+
+    def extract_feature(self, img):
+        with torch.no_grad():
+            img_npy = np.array(img)/255. * 2 - 1
+            img_tensor = torch.tensor(img_npy, dtype=torch.float).view(1, 3, 64, 64)
+            feature = self.forward(img_tensor).detach().numpy().reshape(-1)
+        return feature
+
+
+    def cal_similarity_order(self, get_img_num, base_feature, other_feature_paths):
+        if other_feature_paths is None:
+            return []
+        cos_similarity_list = []
+        for other_feature_path in other_feature_paths:
+            other_feature = np.load(other_feature_path)
+            cos_similarity = np.dot(base_feature, other_feature) / (np.linalg.norm(base_feature) * np.linalg.norm(other_feature))
+            cos_similarity_list.append(cos_similarity)
+        return list(np.argsort(cos_similarity_list))[:get_img_num]
+
 
 
 def load_model(parameter_path):
