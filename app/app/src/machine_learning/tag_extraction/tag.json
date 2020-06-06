@@ -1,4 +1,4 @@
 {
-  "hair_color": ["blonde hair", "brown hair", "black hair", "blue hair", "pink hair", "purple hair", "green hair", "red hair", "silver hair", "white hair", "orange hair", "aqua hair", "grey hair"],
-  "eye_color": ["blue eyes", "red eyes", "brown eyes", "green eyes", "purple eyes", "yellow eyes", "pink eyes", "aqua eyes", "black eyes", "orange eyes", "grey eyes"]
+  "hair_color": ["pink_hair", "blue_hair", "silver_hair", "blonde_hair", "black_hair", "white_hair", "red_hair", "purple_hair", "brown_hair"],
+  "eye_color": ["blue_eyes", "red_eyes", "brown_eyes", "green_eyes", "purple_eyes", "yellow_eyes", "pink_eyes", "aqua_eyes", "black_eyes", "orange_eyes", "grey_eyes"]
 }

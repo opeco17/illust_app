@@ -1,4 +1,4 @@
-from tag_extraction.base import Illustration2VecBase
+from  .base import Illustration2VecBase
 import json
 import warnings
 import numpy as np

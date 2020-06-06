@@ -1,6 +1,7 @@
 FROM python:3.8.0
 
 RUN mkdir /var/www
+RUN mkdir /var/www/log
 
 WORKDIR /var/www
 

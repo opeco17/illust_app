@@ -1,13 +1,13 @@
 import os
 import sys
 import json
+import argparse
 import glob
 import numpy as np
 from PIL import Image
 
-import tag_extraction
+from tag_extraction.tag_extraction import TagExtractor
 from feature_extraction import model
-from feature_extraction import extract_feature
 
 pardir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(pardir)
@@ -15,70 +15,58 @@ sys.path.append(pardir)
 import db_connect
 
 
-PREVIOUS_IMG_DIR = './img_generator/classified_images/'
+PREVIOUS_IMG_DIR = './img_generator/raw_images/'
 PROCESSED_IMG_DIR = './img_generator/processed_images/'
 NEW_IMG_DIR = '../static/'
+I2V_MODULE_PATH = './tag_extraction'
+ENCODER_MODULE_PATH = './feature_extraction'
 
-
-def scale_and_move_img(img, new_img_name):
-    img.save(os.path.join(PROCESSED_IMG_DIR, new_img_name))
+def scale_and_move_img(img, new_img_name, hair_color):
+    img.save(os.path.join(PROCESSED_IMG_DIR, hair_color, new_img_name))
     resized_img = img.resize((128, 128))
     resized_img.save(os.path.join(NEW_IMG_DIR, new_img_name))
 
 
-def extract_hair_color_and_eye_color(img, i2v):
-    with open('./tag_extraction/tag.json', 'r') as f:
-        tag_list = json.load(f)
-    hair_color_list = tag_list['hair_color']
-    eye_color_list = tag_list['eye_color']
-
-    result = i2v.estimate_plausible_tags([img], threshold=0.05)
-    hair_color = None
-    eye_color = None
-    for tag, _ in result[0]['general']:
-        if hair_color is None and tag in hair_color_list:
-            hair_color = tag[:-5]
-        if eye_color is None and tag in eye_color_list:
-            eye_color = tag[:-5]
-        if hair_color is not None and eye_color is not None:
-            continue
-    return hair_color, eye_color
-
-
-def main():
-    # Load illustration2vec
-    illust2vec = tag_extraction.make_i2v_with_chainer(
-        './tag_extraction/illust2vec_tag_ver200.caffemodel',
-        './tag_extraction/tag_list.json'
-    )
+def main(args):
+    # Load Illustration2Vec
+    i2v = TagExtractor(I2V_MODULE_PATH)
 
     # Load Encoder 
-    encoder = model.load_model('./feature_extraction/parameter')
+    encoder = model.load_model(os.path.join(ENCODER_MODULE_PATH, 'parameter'))
 
     # Connect to DB
     conn = db_connect.DBConnector()
     last_img_name = conn.get_last_img_name()
     num = int(last_img_name.rstrip('.png'))
 
-    img_path_list = glob.glob(os.path.join(PREVIOUS_IMG_DIR, '*.png'))
-
     print('Start')
-    for img_path in img_path_list:
-        num += 1
-        new_img_name = str(num)+'.png'
-        img = Image.open(img_path)
-        hair_color, eye_color = extract_hair_color_and_eye_color(img, illust2vec)
-        feature = extract_feature.extract(encoder, img)
+    for hair_color in i2v.hair_color_list:
+        print(hair_color)
+        if not os.path.exists(os.path.join(PROCESSED_IMG_DIR, hair_color)):
+            os.mkdir(os.path.join(PROCESSED_IMG_DIR, hair_color))
 
-        conn.insert_img_info(new_img_name, hair_color, eye_color)
-        scale_and_move_img(img, new_img_name)
-        np.save(os.path.join('feature', str(num)+'.npy'), feature)
-        os.remove(img_path)
+        img_path_list = glob.glob(os.path.join(PREVIOUS_IMG_DIR, hair_color, '*.png'))
 
-        if num == 1000:
-            break
+        for i, img_path in enumerate(img_path_list):
+            print(num)
+            num += 1
+            new_img_name = str(num)+'.png'
+            img = Image.open(img_path)
+            eye_color = i2v.extract_eye_color(img)
+            feature = encoder.extract_feature(img)
+
+            conn.insert_img_info(new_img_name, hair_color, eye_color)
+            scale_and_move_img(img, new_img_name, hair_color)
+            np.save(os.path.join(ENCODER_MODULE_PATH, 'feature',str(num)+'.npy'), feature)
+            # os.remove(img_path)
+
+            if i == args.max_num:
+                break
     conn.complete()
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--max_num', type=int, default=0)
+
+    main(parser.parse_args())

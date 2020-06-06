@@ -1,2 +1,0 @@
-from tag_extraction.base import Illustration2VecBase
-from tag_extraction.chainer_i2v import ChainerI2V, make_i2v_with_chainer
