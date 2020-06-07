@@ -57,7 +57,7 @@ class Encoder(nn.Module):
             other_feature = np.load(other_feature_path)
             cos_similarity = np.dot(base_feature, other_feature) / (np.linalg.norm(base_feature) * np.linalg.norm(other_feature))
             cos_similarity_list.append(cos_similarity)
-        return list(np.argsort(cos_similarity_list))[:get_img_num]
+        return list(np.argsort(cos_similarity_list))[::-1][:get_img_num]
 
 
 

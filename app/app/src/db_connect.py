@@ -73,4 +73,3 @@ class DBConnector(object):
         self.cursor.close()
         self.conn.commit()
         self.conn.close()
-        print('Completed!!')
