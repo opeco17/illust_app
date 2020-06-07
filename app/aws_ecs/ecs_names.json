@@ -1,0 +1,6 @@
+{
+  "cluster": "anime_gans",
+  "task": "anime_gans",
+  "container": "anime_gans",
+  "service": "anime_gans"
+}
