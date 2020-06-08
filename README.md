@@ -6,9 +6,9 @@ Generate your favorite anime character by multiple machine learning algorithms (
 
 Activity contents are ...
 
-1. Machine Learning Infrastracture development
+1. Machine Learning Infrastracture
 2. Machine Learning Algorithms
-3. Web Application Development
+3. Web Application
 
 What I painted in my hands can be seen [here](https://www.pixiv.net/users/44422398)!
 
