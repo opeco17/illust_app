@@ -1,6 +1,6 @@
 # Overview
 
-<img align="right" src="https://user-images.githubusercontent.com/46510874/84046987-bf481a80-a9e5-11ea-9545-5788ad1c6ed0.gif" alt="Web Application Demo" width="500">
+<img align="right" src="https://user-images.githubusercontent.com/46510874/84046987-bf481a80-a9e5-11ea-9545-5788ad1c6ed0.gif" alt="Web Application Demo" width="450">
 
 Generate your favorite anime character by multiple machine learning models (GANs, AutoEncoder, CNN...).
 
