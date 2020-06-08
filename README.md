@@ -2,15 +2,7 @@
 
 <img align="right" src="https://user-images.githubusercontent.com/46510874/84046987-bf481a80-a9e5-11ea-9545-5788ad1c6ed0.gif" alt="Web Application Demo" width="450">
 
-Generate your favorite anime character by multiple machine learning models (GANs, AutoEncoder, CNN...).
-
-Activity contents are ...
-
-1. Machine Learning Infrastracture development
-2. Machine Learning technology
-3. Web Application development
-
-What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
+Generate your favorite anime character by multiple machine learning algorithms (GANs, Auto Encoder, CNN).
 
 # Machine Learning Infrastructure
 
