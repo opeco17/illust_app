@@ -10,7 +10,7 @@ Activity contents are ...
 2. Machine Learning technology
 3. Web Application development
 
-What I painted can be seen [here](https://www.pixiv.net/users/44422398)!
+What I painted in my hands can be seen [here](https://www.pixiv.net/users/44422398)!
 
 # Machine Learning Infrastructure
 
