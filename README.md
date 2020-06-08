@@ -7,8 +7,8 @@ Generate your favorite anime character by multiple machine learning algorithms (
 Activity contents are ...
 
 1. Machine Learning Infrastracture development
-2. Machine Learning technology
-3. Web Application development
+2. Machine Learning Algorithms
+3. Web Application Development
 
 What I painted in my hands can be seen [here](https://www.pixiv.net/users/44422398)!
 
@@ -21,7 +21,7 @@ What I painted in my hands can be seen [here](https://www.pixiv.net/users/444223
  
  - Codes -> app/
  
- # Machine Learning
+ # Machine Learning Algorithms
   - Use multiple meachine learning algorithms for generating images, recommender system, and tag extraction.
   
   ## SNGAN & WGAN-GP
