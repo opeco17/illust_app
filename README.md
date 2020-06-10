@@ -31,8 +31,8 @@ What I painted in my hands can be seen [here](https://www.pixiv.net/users/444223
   
    - Code -> ml_infra/machine_learning/sngan & ml_infra/machine_learning/wgan_gp
   
- ## Auto Encoder
-  - Use Auto Encoder for image to image recommendation system.
+ ## Denoising Auto Encoder with Self Attention
+  - Use Auto Encoder for image to image recommendation.
  
   - AutoEncoder extracts feature of images and calculate similarity between submitted ones and generated ones.
  
