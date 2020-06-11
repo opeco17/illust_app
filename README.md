@@ -14,7 +14,7 @@ What I painted in my hands can be seen [here](https://www.pixiv.net/users/444223
 
 # Machine Learning Infrastructure
 
-<img width="1000" alt="スクリーンショット 2020-05-17 14 23 19" src="https://user-images.githubusercontent.com/46510874/82136546-1d039f80-984a-11ea-9cbb-5d7bb70450ec.png">
+<img width="900" alt="スクリーンショット 2020-05-17 14 23 19" src="https://user-images.githubusercontent.com/46510874/82136546-1d039f80-984a-11ea-9cbb-5d7bb70450ec.png">
 
  - Use AWS for automaticaly and efficiently training models.
  - Most process are described by boto3 and its high level API (e.g. Step Functions Data Science SDK).
@@ -32,11 +32,9 @@ What I painted in my hands can be seen [here](https://www.pixiv.net/users/444223
    - Code -> ml_infra/machine_learning/sngan & ml_infra/machine_learning/wgan_gp
   
  ## Denoising Auto Encoder with Self Attention
-  - Use original Auto Encoder model for high accurate image to image recommendation.
+  - Use customized Auto Encoder model for high accurate image to image recommendation.
  
   - AutoEncoder extracts feature of images and calculate similarity between submitted ones and generated ones.
- 
-  - By using this model, I developed image based searching.
   
   <img width="700" alt="recommend_sample" src="https://user-images.githubusercontent.com/46510874/84335694-65577880-abd0-11ea-9526-1f405f7db912.png">
  
