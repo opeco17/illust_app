@@ -19,24 +19,28 @@ class DBConnector(object):
             self.cursor.execute(
                 "SELECT image_name FROM images \
                 WHERE used = FALSE \
+                ORDER BY RAND() \
                 LIMIT %s", (get_img_num, )
             )
         elif hair_color is None:
             self.cursor.execute(
                 "SELECT image_name FROM images \
                 WHERE eye_color = %s AND used = FALSE \
+                ORDER BY RAND() \
                 LIMIT %s", (eye_color, get_img_num)
             )
         elif eye_color is None:
             self.cursor.execute(
                 "SELECT image_name FROM images \
                 WHERE hair_color = %s AND used = FALSE \
+                ORDER BY RAND() \
                 LIMIT %s", (hair_color, get_img_num)
             )
         else:
             self.cursor.execute(
                 "SELECT image_name FROM images \
                 WHERE hair_color = %s AND eye_color = %s AND used = FALSE \
+                ORDER BY RAND() \
                 LIMIT %s", (hair_color, eye_color, get_img_num)
             )
         result = self.cursor.fetchall()
