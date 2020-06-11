@@ -37,6 +37,8 @@ What I painted in my hands can be seen [here](https://www.pixiv.net/users/444223
   - AutoEncoder extracts feature of images and calculate similarity between submitted ones and generated ones.
  
   - By using this model, I developed image based searching.
+  
+  <img width="600" alt="recommend_sample" src="https://user-images.githubusercontent.com/46510874/84335694-65577880-abd0-11ea-9526-1f405f7db912.png">
  
   - Code -> ml_infra/machine_learning/auto_encoder
 
