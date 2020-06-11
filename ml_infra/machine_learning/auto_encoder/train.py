@@ -13,6 +13,12 @@ from model import AutoEncoder
 from dataloader import MyDataset
 
 
+def add_noise(x, var):
+    batch_size, channel, height, width = x.size()
+    noise = torch.normal(0, var, (batch_size, channel, height, width))
+    return x + noise
+
+
 def main():
     print('Start')
     device = torch.device('cuda')
@@ -51,7 +57,8 @@ def main():
         model.to(device)
         loss_train = 0
         for x in train_dataloader:
-            recon_x = model(x)
+            noised_x = add_noise(x, 0.1)
+            recon_x = model(noised_x)
             loss = criterion(recon_x, x)
             optimizer.zero_grad()
             loss.backward()
