@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<h4>あなたの好みのタグを選んで下さい。</h4>
+<br>
+<div class="form">
+    {{ wtf.quick_form(form) }}
+</div>
+<br>
+<a href="{{ url_for('index')}}">前のページへ戻る</a>
+{% endblock %}

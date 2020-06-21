@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<h4>あなたのお気に入りのイラストをアップロードして下さい。</h4>
+<h5>jpgまたはpngを選択できます。</h5>
+<h5>下のサンプルイラストも利用できます。</h5>
+<br>
+
+<img src="./static/sample_img_mini1.png" alt="sample illust" width="11%" height="11%">
+<img src="./static/sample_img_mini2.png" alt="sample illust" width="11%" height="11%">
+<img src="./static/sample_img_mini3.png" alt="sample illust" width="11%" height="11%">
+
+<div class="form">
+    {{ wtf.quick_form(form) }}
+    <!-- <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+      
+        {{ wtf.form_field(form.illust) }}
+        {{ wtf.form_field(form.submit, class="btn btn-primary") }}
+      </form> -->
+</div>
+<br>
+<a href="{{ url_for('index')}}">前のページへ戻る</a>
+{% endblock %}

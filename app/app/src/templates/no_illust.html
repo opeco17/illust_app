@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<h3>指定の条件ではイラストを生成できませんでした。</h3>
+<h3>申し訳ございませんが、条件を変えてお試し下さい。</h3>
+<br>
+<a href="{{ url_for('index')}}">はじめのページへ戻る</a>
+{% endblock %}
