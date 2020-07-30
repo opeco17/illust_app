@@ -7,55 +7,57 @@ import torch.nn.functional as F
 import torch.nn.init as init
 
 
+
 class ConditionalBatchNorm2d(nn.BatchNorm2d):
 
-    def __init__(self, num_features, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True):
-        super(ConditionalBatchNorm2d, self).__init__(num_features, eps, momentum, affine, track_running_stats)
+    def __init__(self, num_features):
+        super(ConditionalBatchNorm2d, self).__init__(num_features=num_features, affine=False)
+
 
     def forward(self, input, weight, bias, **kwargs):
         self._check_input_dim(input)
 
-        exponential_average_factor = 0.0
-
-        if self.training and self.track_running_stats:
-            self.num_batches_tracked += 1
-            if self.momentum is None:  # use cumulative moving average
-                exponential_average_factor = 1.0 / self.num_batches_tracked.item()
-            else:  # use exponential moving average
-                exponential_average_factor = self.momentum
+        exponential_average_factor = self.momentum if self.training else 0.0
 
         output = F.batch_norm(input, self.running_mean, self.running_var,
                               self.weight, self.bias,
-                              self.training or not self.track_running_stats,
-                              exponential_average_factor, self.eps)
+                              self.training, exponential_average_factor, self.eps)
+ 
+        # expand dimention to 2 if dimention is 1
         if weight.dim() == 1:
             weight = weight.unsqueeze(0)
         if bias.dim() == 1:
             bias = bias.unsqueeze(0)
         size = output.size()
+
+        # expand dimention to 4 to calculate affine transformation
         weight = weight.unsqueeze(-1).unsqueeze(-1).expand(size)
         bias = bias.unsqueeze(-1).unsqueeze(-1).expand(size)
         
         return weight * output + bias
 
 
+
 class CategoricalConditionalBatchNorm2d(ConditionalBatchNorm2d):
 
-    def __init__(self, num_classes, num_features, eps=1e-5, momentum=0.1, affine=False, track_running_stats=True):
-        super(CategoricalConditionalBatchNorm2d, self).__init__(num_features, eps, momentum, affine, track_running_stats)
+    def __init__(self, num_classes, num_features, affine=False):
+        super(CategoricalConditionalBatchNorm2d, self).__init__(num_features=num_features)
         self.weights = nn.Embedding(num_classes, num_features)
         self.biases = nn.Embedding(num_classes, num_features)
         self._initialize()
 
+
     def _initialize(self):
         init.ones_(self.weights.weight.data)
         init.zeros_(self.biases.weight.data)
+
 
     def forward(self, input, c, **kwargs):
         weight = self.weights(c)
         bias = self.biases(c)
 
         return super(CategoricalConditionalBatchNorm2d, self).forward(input, weight, bias)
+
 
 
 class GeneratorBlock(nn.Module):
@@ -75,13 +77,16 @@ class GeneratorBlock(nn.Module):
 
         self._initialize()
 
+
     def _initialize(self):
         init.xavier_uniform_(self.c1.weight.data, gain=math.sqrt(2))
         init.xavier_uniform_(self.c2.weight.data, gain=math.sqrt(2))
         init.xavier_uniform_(self.c_sc.weight.data, gain=1)
             
+
     def forward(self, x, y, **kwargs):
         return self.c_sc(self._upsample(x)) + self.residual(x, y)
+
 
     def residual(self, x, y):
         h = self.b1(x, y)
@@ -98,16 +103,13 @@ class GeneratorBlock(nn.Module):
         return F.interpolate(x, size=(h * 2, w * 2), mode='bilinear')
 
 
+
 class ResNetGenerator(nn.Module):
 
-    def __init__(self, num_features=64, dim_z=128, bottom_width=4, activation=F.relu, num_classes=0, distribution='normal'):
+    def __init__(self, num_features=64, dim_z=128, bottom_width=4, activation=F.relu, num_classes=0):
         super(ResNetGenerator, self).__init__()
-        self.num_features = num_features
-        self.dim_z = dim_z
         self.bottom_width = bottom_width
         self.activation = activation
-        self.num_classes = num_classes
-        self.distribution = distribution
 
         self.l1 = nn.Linear(dim_z, 16*num_features*bottom_width*bottom_width)
         self.block2 = GeneratorBlock(num_features*16, num_features*8, activation=activation, num_classes=num_classes)
@@ -119,9 +121,11 @@ class ResNetGenerator(nn.Module):
 
         self._initialize()
 
+
     def _initialize(self):
         init.xavier_uniform_(self.l1.weight.data)
         init.xavier_uniform_(self.conv6.weight.data)
+
 
     def forward(self, z, y=None, **kwargs):
         h = self.l1(z).view(z.size(0), -1, self.bottom_width, self.bottom_width) 

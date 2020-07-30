@@ -21,7 +21,8 @@ NEW_IMG_DIR = '../static/'
 I2V_MODULE_PATH = './tag_extraction'
 ENCODER_MODULE_PATH = './feature_extraction'
 
-def scale_and_move_img(img, new_img_name, hair_color):
+
+def move_img(img, new_img_name, hair_color):
     img.save(os.path.join(PROCESSED_IMG_DIR, hair_color, new_img_name))
     resized_img = img.resize((128, 128))
     resized_img.save(os.path.join(NEW_IMG_DIR, new_img_name))
@@ -42,8 +43,7 @@ def main(args):
     print('Start')
     for hair_color in i2v.hair_color_list:
         print(hair_color)
-        if not os.path.exists(os.path.join(PROCESSED_IMG_DIR, hair_color)):
-            os.mkdir(os.path.join(PROCESSED_IMG_DIR, hair_color))
+        os.mkdir(os.path.join(PROCESSED_IMG_DIR, hair_color)) if not os.path.exists(os.path.join(PROCESSED_IMG_DIR, hair_color)) else None
 
         img_path_list = glob.glob(os.path.join(PREVIOUS_IMG_DIR, hair_color, '*.png'))
 
@@ -56,12 +56,13 @@ def main(args):
             feature = encoder.extract_feature(img)
 
             conn.insert_img_info(new_img_name, hair_color, eye_color)
-            scale_and_move_img(img, new_img_name, hair_color)
+            move_img(img, new_img_name, hair_color)
             np.save(os.path.join(ENCODER_MODULE_PATH, 'feature',str(num)+'.npy'), feature)
             # os.remove(img_path)
 
             if i == args.max_num:
                 break
+
     conn.complete()
 
 
