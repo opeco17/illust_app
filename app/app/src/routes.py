@@ -6,7 +6,6 @@ from PIL import Image
 from flask import flash, render_template, request, redirect, url_for, send_from_directory
 
 from run import app
-# from run import i2v
 from run import encoder
 from forms import IllustUploadForm, TagSelectForm
 from recommender import Recommender
@@ -25,8 +24,6 @@ def illust_condition():
 	if upload_form.validate_on_submit():
 		img = Image.open(BytesIO(upload_form.illust.data.read()))
 		base_feature = encoder.extract_feature(img.resize((64, 64)))
-		# upload_form.illust.data.save(os.path.join('./upload_illust', 'uploaded.png'))
-		# img = Image.open(os.path.join('./upload_illust', 'uploaded.png'))
 		
 		candidate_illust_names = Recommender.choose_illusts_from_tag(500, None, None)
 		candidate_feature_paths = [os.path.join('./machine_learning/feature_extraction/feature', candidate_illust_name.replace('png', 'npy')) for candidate_illust_name in candidate_illust_names]

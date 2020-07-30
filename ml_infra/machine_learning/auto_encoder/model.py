@@ -4,6 +4,7 @@ import torch.nn.functional as F
 
 
 class SelfAttention(nn.Module):
+
     def __init__(self, in_ch):
         super(SelfAttention, self).__init__()
         self.query_conv = nn.Conv2d(in_ch, in_ch//8, 1)
@@ -13,9 +14,9 @@ class SelfAttention(nn.Module):
         
         self.softmax = nn.Softmax(dim=-1)
         
+
     def forward(self, x):
         batch_size, ch, width, height = x.size()
-        
         h = x
         proj_query = self.query_conv(h).view(batch_size, -1, width*height).permute(0, 2, 1)
         proj_key = self.key_conv(h).view(batch_size, -1, width*height)
@@ -27,9 +28,11 @@ class SelfAttention(nn.Module):
         out = out.view(batch_size, ch, width, height)
         out = x + self.gamma * out
         return out
+        
 
 
 class EncoderBlock(nn.Module):
+
     def __init__(self, in_ch, out_ch, k_size=3, stride=1, pad=1, optimize=False):
         super(EncoderBlock, self).__init__()
         self.optimize = optimize
@@ -56,6 +59,7 @@ class EncoderBlock(nn.Module):
         return F.avg_pool2d(x, 2)
 
 
+
 class Encoder(nn.Module):
     
     def __init__(self, in_ch=3, h_dim=512, num_features=32):
@@ -68,6 +72,7 @@ class Encoder(nn.Module):
         self.layer4 = EncoderBlock(num_features*4, num_features*8)
         self.layer5 = nn.Linear(4096, h_dim)
     
+
     def forward(self, x):
         h = x
         h = self.layer1(h)
@@ -78,6 +83,7 @@ class Encoder(nn.Module):
         h = self.layer4(h).view(-1, 4096)
         h = self.layer5(h)
         return h
+
 
 
 class DecoderBlock(nn.Module):
@@ -109,6 +115,7 @@ class DecoderBlock(nn.Module):
         return F.interpolate(x, size=(h * 2, w * 2), mode='bilinear')
 
 
+
 class Decoder(nn.Module):
     
     def __init__(self, h_dim=512, num_features=32, bottom_width=4):
@@ -138,6 +145,7 @@ class Decoder(nn.Module):
         h = self.sa2(h)
         h = self.layer5(h)
         return torch.tanh(h)
+
 
 
 class AutoEncoder(nn.Module):

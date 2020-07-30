@@ -1,6 +1,7 @@
 import random
 import os
 import glob
+import argparse
 import numpy as np
 
 import torch
@@ -19,37 +20,47 @@ def add_noise(x, var):
     return x + noise
 
 
-def main():
+def train(args):
     print('Start')
-    device = torch.device('cuda')
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+    if torch.cuda.is_available():
+        device = 'cuda'
+        torch.set_default_tensor_type('torch.cuda.FloatTensor')
+    else:
+        device = 'cpu'
 
-    train_epoch = 1000
+    train_epoch = args.train_epoch
+    lr = args.lr
+    beta1 = args.beta1
+    beta2 = args.beta2
+    batch_size = args.batch_size
+    noise_var = args.noise_var
 
-    images_path = glob.glob('../64_size_face_images/*.png')
-    images_path = random.sample(images_path, len(images_path))
+    h_dim = args.h_dim
+
+    images_path = glob.glob(args.data_dir+'/face_images/*/*.png')
+    random.shuffle(images_path)
     split_num = int(len(images_path)*0.8)
     train_path = images_path[:split_num]
     test_path = images_path[split_num:]
     result_path = images_path[-15:]
 
     train_dataset = MyDataset(train_path)
-    train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
+    train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
     test_dataset = MyDataset(test_path)
-    test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=True)
+    test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
     result_dataset = MyDataset(result_path)
     result_dataloader = torch.utils.data.DataLoader(result_dataset, batch_size=result_dataset.__len__(), shuffle=False)
     result_images = next(iter(result_dataloader))
 
-    model = AutoEncoder().to(device)
+    model = AutoEncoder(h_dim=h_dim).to(device)
 
     criterion = nn.MSELoss()
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
+    optimizer = torch.optim.Adam(model.parameters(), lr, (beta1, beta2))
 
-    out_path = './output512-tanh'
+    out_path = args.model_dir
     train_loss_list = []
     test_loss_list = []
 
@@ -57,7 +68,7 @@ def main():
         model.to(device)
         loss_train = 0
         for x in train_dataloader:
-            noised_x = add_noise(x, 0.1)
+            noised_x = add_noise(x, noise_var)
             recon_x = model(noised_x)
             loss = criterion(recon_x, x)
             optimizer.zero_grad()
@@ -82,4 +93,24 @@ def main():
                 
         
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+
+    # Training Parameters
+    parser.add_argument('--train_epoch', type=int, default=3)
+    parser.add_argument('--lr', type=float, default=0.0002)
+    parser.add_argument('--beta1', type=float, default=0.0)
+    parser.add_argument('--beta2', type=float, default=0.9)
+    parser.add_argument('--batch_size', type=int, default=4)
+    parser.add_argument('--noise_var', type=float, default=0.1)
+
+    # Model Parameters
+    parser.add_argument('--h_dim', type=int, default=256)
+
+    # SageMaker Parameters
+    parser.add_argument('--hosts', type=list, default=json.loads(os.environ['SM_HOSTS']))
+    parser.add_argument('--current_host', type=str, default=os.environ['SM_CURRENT_HOST'])
+    parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
+    parser.add_argument('--data_dir', type=str, default=os.environ['SM_CHANNEL_TRAINING'])
+    parser.add_argument('--num_gpus',type=int, default=os.environ['SM_NUM_GPUS'])
+
+    train(parser.parse_args())

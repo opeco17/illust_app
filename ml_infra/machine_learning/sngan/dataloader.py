@@ -8,16 +8,19 @@ from PIL import Image
 def sample_z(batch_size, dim_z, device):
     return torch.empty(batch_size, dim_z, dtype=torch.float32, device=device).normal_()
 
+
 def sample_pseudo_labels(num_classes, batch_size, device):
     pseudo_labels = torch.from_numpy(np.random.randint(low=0, high=num_classes, size=(batch_size)))
     pseudo_labels = pseudo_labels.type(torch.long).to(device)
     return pseudo_labels
     
+
 def sample_from_gen(num_classes, batch_size, dim_z, device, gen):
     z = sample_z(batch_size, dim_z, device)
     pseudo_y = sample_pseudo_labels(num_classes, batch_size, device)
-    fake = gen(z, pseudo_y) #It's equal to gen.forward method
+    fake = gen(z, pseudo_y)
     return fake, pseudo_y, z
+
 
 
 class MyDataset(torch.utils.data.Dataset):

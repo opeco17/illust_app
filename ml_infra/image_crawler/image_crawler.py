@@ -21,7 +21,7 @@ def main():
     sh = logging.StreamHandler()
     logger.addHandler(sh)
 
-    # Get bookmar user id
+    # Get bookmarked user id
     bookmark_user_id_df = pd.read_csv('./bookmark_user_id.csv')
     bookmark_user_id_list = list(bookmark_user_id_df.user_id)
 
@@ -35,8 +35,7 @@ def main():
     aapi.login(client_info["pixiv_id"], client_info["password"])
 
     # Make directory if not exists
-    mkdirExceptExist = lambda path: "" if os.path.exists(path) else os.mkdir(path)
-    mkdirExceptExist("./pixiv_images")
+    os.mkdir('./pixiv_images') if not os.path.exists('./pixiv_images') else None
 
     for user_id in bookmark_user_id_list:
         print(user_id)

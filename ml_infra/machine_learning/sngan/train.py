@@ -39,7 +39,7 @@ def train(args):
     train_epoch = args.train_epoch
     n_dis = args.n_dis
     batch_size = args.batch_size
-    _n_cls = len(hair_colors)
+    num_classes = len(hair_colors)
 
     gen_num_features = args.gen_num_features
     gen_dim_z = args.gen_dim_z
@@ -53,10 +53,10 @@ def train(args):
     
     gen = model.ResNetGenerator(
         gen_num_features, gen_dim_z, gen_bottom_width,
-        activation=F.relu, num_classes=_n_cls, distribution=gen_distribution
+        activation=F.relu, num_classes=num_classes
     ).to(device)
 
-    dis = model.SNResNetProjectionDiscriminator(dis_num_features, _n_cls, F.relu).to(device)
+    dis = model.SNResNetProjectionDiscriminator(dis_num_features, num_classes, F.relu).to(device)
     
     opt_gen = optim.Adam(gen.parameters(), lr, (beta1, beta2))
     opt_dis = optim.Adam(dis.parameters(), lr, (beta1, beta2))
@@ -73,7 +73,7 @@ def train(args):
 
             for i in range(n_dis):
                 if i == 0:
-                    fake, pseudo_y, _ = dataloader.sample_from_gen(_n_cls, batch_size, gen_dim_z, device, gen)
+                    fake, pseudo_y, _ = dataloader.sample_from_gen(num_classes, batch_size, gen_dim_z, device, gen)
                     dis_fake = dis(fake, pseudo_y)
                     loss_gen = gen_criterion(dis_fake, None)
 
@@ -81,7 +81,7 @@ def train(args):
                     loss_gen.backward()
                     opt_gen.step()
 
-                fake, pseudo_y, _ = dataloader.sample_from_gen(_n_cls, batch_size, gen_dim_z, device, gen)
+                fake, pseudo_y, _ = dataloader.sample_from_gen(num_classes, batch_size, gen_dim_z, device, gen)
                 real, y = x_batch.type(torch.float32).to(device), y_batch.to(device)
                 dis_fake, dis_real = dis(fake, pseudo_y), dis(real, y)
                 loss_dis = dis_criterion(dis_fake, dis_real)
