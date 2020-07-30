@@ -4,7 +4,7 @@ services:
   uwsgi:
     build: ./app
     volumes:
-      - ./app:/var/www/ #アプリケーション共有
+      - ./app:/var/www/ #mount application source
     ports:
       - 3031:3031
     environment:
@@ -18,8 +18,8 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf #設定ファイル共有
-      - ./nginx/log:/var/log/nginx #ログ出力
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf #mount configuration
+      - ./nginx/log:/var/log/nginx #nginx logging
     ports:
       - 80:80
     environment:
@@ -32,18 +32,17 @@ services:
 
   db:
     build: ./db
-    # restart: always
     hostname: my-mysql
+    env_file:
+      - ./env_file.env
     environment:
-      MYSQL_ROOT_PASSWORD: root
       TZ: "Asia/Tokyo"
-      BIND-ADDRESS: 0.0.0.0
     ports:
       - 3306:3306
     volumes:
-      - ./db/mysql_init:/docker-entrypoint-initdb.d #DB初期化
-      - ./db/mysql_data:/var/lib/mysql #データ永続化
-      - ./db/conf.d:/etc/mysql/conf.d  #設定ファイル共有
+      - ./db/mysql_init:/docker-entrypoint-initdb.d #initialize db
+      - ./db/mysql_data:/var/lib/mysql #permanent db
+      - ./db/conf.d:/etc/mysql/conf.d  #mount configuration
     tty: true
     networks:
       - pixiv-gans-network

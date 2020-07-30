@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 bootstrap = Bootstrap(app)
 # i2v = TagExtractor(I2V_MODULE_PATH)
-encoder = load_model(os.path.join(ENCODER_MODULE_PATH, 'parameter'))
+encoder = load_model(os.path.join(ENCODER_MODULE_PATH, 'parameter.pth'))
 
 with open(os.path.join(I2V_MODULE_PATH, 'tag.json'), 'r') as f:
     tag_list = json.load(f)
