@@ -10,7 +10,7 @@ Machine Learning: PyTorch
 
 Application: Flask / MySQL / NGINX / uWSGI / Docker
 
-infrastructure: AWS / Docker
+Infrastructure: AWS / Docker
 
  # Machine Learning Algorithms
   - Use multiple meachine learning algorithms for generating images, recommender system, and tag extraction.
