@@ -2,7 +2,7 @@
 
 <img align="right" src="https://user-images.githubusercontent.com/46510874/84046987-bf481a80-a9e5-11ea-9545-5788ad1c6ed0.gif" alt="Web Application Demo" width="450">
 
-Generate your favorite anime character by multiple machine learning algorithms (GANs, Auto Encoder, I2V).
+This application enerates your favorite anime character with multiple machine learning algorithms (GANs, Auto Encoder, I2V).
 
 Activity contents are ...
 
@@ -10,14 +10,12 @@ Activity contents are ...
 2. Machine Learning Algorithms
 3. Web Application
 
-What I painted in my hands can be seen [here](https://www.pixiv.net/users/44422398)!
-
 # Machine Learning Infrastructure
 
 <img width="900" alt="スクリーンショット 2020-05-17 14 23 19" src="https://user-images.githubusercontent.com/46510874/82136546-1d039f80-984a-11ea-9cbb-5d7bb70450ec.png">
 
  - Use AWS for automaticaly and efficiently training models.
- - Most process are described by boto3 and its high level API (e.g. Step Functions Data Science SDK).
+ - Most process are described with boto3 and its high level API (e.g. Step Functions Data Science SDK).
  
  - Codes -> app/
  
