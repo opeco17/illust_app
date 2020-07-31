@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from flask_mail import Mail
 
 from config import Config
 from machine_learning.tag_extraction.tag_extraction import TagExtractor
@@ -13,6 +14,10 @@ ENCODER_MODULE_PATH = './machine_learning/feature_extraction'
 app = Flask(__name__)
 app.config.from_object(Config)
 bootstrap = Bootstrap(app)
+mail = Mail()
+mail.init_app(app)
+with open('mail_info.json', 'r') as f:
+    mail_info = json.load(f)
 # i2v = TagExtractor(I2V_MODULE_PATH)
 encoder = load_model(os.path.join(ENCODER_MODULE_PATH, 'parameter.pth'))
 
