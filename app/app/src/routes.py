@@ -34,17 +34,15 @@ def contact():
 	contact_form = ContactForm()
 	if request.method == 'POST':
 		if contact_form.validate() == False:
-			return render_template('contact.html', form=contact_form)
+			flash('All fields are required.')
+			return render_template('contact.html', form=contact_form, success=False)
 		else:
-			msg = Message(contact_form.subject.data, sender=mail_info['mail_username'], recipients=mail_info['mail_username'])
-			msg.body = """
-			From: %s &lt;%s&gt;
-			%s
-			""" % (contact_form.name.data, contact_form.email.data, contact_form.message.data)
+			msg = Message(contact_form.subject.data, sender=mail_info['mail_username'], recipients=[mail_info['mail_username']])
+			msg.body = "Contact Information \n Name: {} \n Mail: {}  \n Content: {}".format(contact_form.name.data, contact_form.email.data, contact_form.message.data)
 			mail.send(msg)
-			return 'Form posted'
+			return render_template('contact.html', success=True)
 	elif request.method == 'GET':
-		return render_template('contact.html', form=contact_form)
+		return render_template('contact.html', form=contact_form, success=False)
 
 
 

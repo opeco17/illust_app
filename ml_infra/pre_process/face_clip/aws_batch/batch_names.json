@@ -1,1 +1,6 @@
-{"computeEnvironment": "face_clip2", "jobQueue": "face_clip2", "jobDefinition": "face_clip2", "job": "face_clip2"}
+{
+    "computeEnvironment": "face_clip2", 
+    "jobQueue": "face_clip2", 
+    "jobDefinition": "face_clip2", 
+    "job": "face_clip2"
+}

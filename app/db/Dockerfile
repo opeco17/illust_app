@@ -2,4 +2,4 @@ FROM mysql:latest
 
 WORKDIR /
 
-COPY image_db.sql / 
+#COPY image_db.sql / 
