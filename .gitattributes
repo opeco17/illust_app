@@ -1,0 +1,4 @@
+static.zip filter=lfs diff=lfs merge=lfs -text
+feature.zip filter=lfs diff=lfs merge=lfs -text
+illust2vec_tag_ver200.caffemodel filter=lfs diff=lfs merge=lfs -text
+*.sql linguist-detectable=false
