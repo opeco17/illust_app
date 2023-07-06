@@ -6,7 +6,7 @@ WTForms==2.2.1
 Flask-Mail==0.9.1 
 mysqlclient==1.4.6
 numpy==1.18.4
-scipy==1.4.1
+scipy==1.10.0
 scikit-image==0.17.2 
 pillow==6.2.1
 opencv-contrib-python==4.2.0.32 
